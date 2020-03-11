@@ -11,6 +11,7 @@ export class DynamicTableComponent implements OnInit , AfterViewInit {
   @Input() rows;
   @Input() deleteBtn;
   @Input() editBtn;
+  @Input() serverPagination;
   @Output() deleteData = new EventEmitter();
   @Output() editData = new EventEmitter();
   pagination = new BehaviorSubject(null);
@@ -36,9 +37,11 @@ export class DynamicTableComponent implements OnInit , AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-   this.paginator.page.subscribe(res => {
-     this.pagination.next(res);
-   });
+   if (this.serverPagination === true) {
+     this.paginator.page.subscribe(res => {
+       this.pagination.next(res);
+     });
+   }
   }
 
 
