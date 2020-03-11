@@ -1,15 +1,20 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-dynamic-table',
   templateUrl: './dynamic-table.component.html',
   styleUrls: ['./dynamic-table.component.css']
 })
-export class DynamicTableComponent implements OnInit , AfterViewInit{
+export class DynamicTableComponent implements OnInit , AfterViewInit {
   @Input() rows;
   @Input() deleteBtn;
   @Input() editBtn;
+  @Output() deleteData = new EventEmitter();
+  @Output() editData = new EventEmitter();
+  pagination = new BehaviorSubject(null);
+
   public columns;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -32,12 +37,18 @@ export class DynamicTableComponent implements OnInit , AfterViewInit{
 
   ngAfterViewInit(): void {
    this.paginator.page.subscribe(res => {
-     console.log(res);
+     this.pagination.next(res);
    });
   }
 
 
+  editRowData(element: any) {
+    this.editData.emit(element);
+  }
   deleteRowData(element: any) {
-    console.log(element);
+    this.deleteData.emit(element);
+  }
+
+  pageResize($event: Event) {
   }
 }

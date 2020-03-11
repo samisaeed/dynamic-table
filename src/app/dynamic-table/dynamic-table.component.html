@@ -4,7 +4,7 @@
     <td mat-cell *matCellDef="let element">
       <span *ngIf="column !== 'actions'">{{element[column]}}</span>
       <span *ngIf="column === 'actions'">
-        <button *ngIf="editBtn" mat-icon-button (click)="deleteRowData(element)"
+        <button *ngIf="editBtn" mat-icon-button (click)="editRowData(element)"
                   color="primary">
             <mat-icon>edit</mat-icon>
           </button>
@@ -19,4 +19,4 @@
   <tr mat-row *matRowDef="let row; columns: columns;"></tr>
 </table>
 <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
-<!--<mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>-->
+

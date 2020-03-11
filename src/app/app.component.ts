@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {DynamicTableComponent} from './dynamic-table/dynamic-table.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit , AfterViewInit {
+
+  @ViewChild(DynamicTableComponent, {static: true}) paginator: DynamicTableComponent;
   public rows = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
     {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
@@ -21,4 +24,21 @@ export class AppComponent {
     {position: 12, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
     {position: 13, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
   ];
+ ngOnInit(): void {
+ }
+ ngAfterViewInit(): void {
+   this.paginator.pagination.subscribe(res => {
+     console.log('parent pagination value ngAfterViewInit', res);
+   });
+
+ }
+
+
+  deleteValue(event: any) {
+    console.log('parent delete value', event);
+
+  }
+  editValue(event: any) {
+    console.log('parent edit value', event);
+  }
 }
