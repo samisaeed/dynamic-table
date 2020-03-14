@@ -1,6 +1,6 @@
-<table mat-table [dataSource]="rows" class="mat-elevation-z8">
+<table mat-table [dataSource]="rows" class="mat-elevation-z8" matSort>
   <ng-container *ngFor="let i = index; let column of columns" matColumnDef="{{column}}">
-    <th mat-header-cell *matHeaderCellDef>{{column | uppercase}} </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column | uppercase}} </th>
     <td mat-cell *matCellDef="let element">
       <span *ngIf="column !== 'actions'">{{element[column]}}</span>
       <span *ngIf="column === 'actions'">
@@ -11,6 +11,10 @@
          <button *ngIf="deleteBtn" mat-icon-button (click)="deleteRowData(element)"
                  color="primary">
             <mat-icon>delete</mat-icon>
+          </button>
+        <button *ngIf="viewBtn" mat-icon-button (click)="viewRowData(element)"
+                 color="primary">
+            <mat-icon>remove_red_eye</mat-icon>
           </button>
         </span>
     </td>

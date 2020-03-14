@@ -10,6 +10,7 @@ import {
   MatPaginatorModule,
   MatTableModule
 } from '@angular/material';
+import {MatSortModule} from '@angular/material/sort';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
     MatTableModule,
     MatIconModule,
     MatPaginatorModule,
+    MatSortModule,
   ]
 })
 export class DynamicTableModule { }

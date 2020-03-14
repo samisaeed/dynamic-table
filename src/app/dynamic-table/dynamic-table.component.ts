@@ -12,8 +12,10 @@ export class DynamicTableComponent implements OnInit , AfterViewInit {
   @Input() deleteBtn;
   @Input() editBtn;
   @Input() serverPagination;
+  @Input() viewBtn;
   @Output() deleteData = new EventEmitter();
   @Output() editData = new EventEmitter();
+  @Output() viewDetails = new EventEmitter();
   pagination = new BehaviorSubject(null);
 
   public columns;
@@ -26,11 +28,13 @@ export class DynamicTableComponent implements OnInit , AfterViewInit {
   ngOnInit(): void {
    this.generateTable();
    this.rows.paginator = this.paginator;
+   this.rows.sort = this.sort;
+
   }
 
   generateTable(): void {
     this.columns = (Object.keys(this.rows[0]));
-    if (this.deleteBtn === true) {
+    if (this.deleteBtn === true || this.editBtn === true) {
       this.columns.push('actions');
     }
     this.rows = new MatTableDataSource(this.rows);
@@ -43,15 +47,13 @@ export class DynamicTableComponent implements OnInit , AfterViewInit {
      });
    }
   }
-
-
   editRowData(element: any) {
     this.editData.emit(element);
   }
   deleteRowData(element: any) {
     this.deleteData.emit(element);
   }
-
-  pageResize($event: Event) {
+  viewRowData(element): void {
+   this.viewDetails.emit(element);
   }
 }

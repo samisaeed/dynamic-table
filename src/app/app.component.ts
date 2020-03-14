@@ -1,14 +1,17 @@
 import {AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DynamicTableComponent} from './dynamic-table/dynamic-table.component';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {ViewComponentComponent} from "./view-component/view-component.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit , AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   @ViewChild(DynamicTableComponent, {static: true}) paginator: DynamicTableComponent;
+
   public rows = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
     {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
@@ -20,25 +23,39 @@ export class AppComponent implements OnInit , AfterViewInit {
     {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
     {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-    {position: 11, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-    {position: 12, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-    {position: 13, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+    {position: 11, name: 'hello', weight: 20.1797, symbol: 'Ne'},
+    {position: 12, name: 'hi', weight: 20.1797, symbol: 'Ne'},
+    {position: 13, name: 'bye', weight: 20.1797, symbol: 'Ne'},
   ];
- ngOnInit(): void {
- }
- ngAfterViewInit(): void {
-   this.paginator.pagination.subscribe(res => {
-     console.log('parent pagination value ngAfterViewInit', res);
-   });
 
- }
+  constructor(public dialog: MatDialog) {
+  }
+
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.paginator.pagination.subscribe(res => {
+      // console.log('parent pagination value ngAfterViewInit', res);
+    });
+  }
 
 
   deleteValue(event: any) {
-    console.log('parent delete value', event);
+    // console.log('parent delete value', event);
 
   }
+
   editValue(event: any) {
-    console.log('parent edit value', event);
+    // console.log('parent edit value', event);
   }
+
+  viewDetails(event): void {
+    // const icon = 'delete';
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '800px';
+    dialogConfig.data = event;
+    this.dialog.open(ViewComponentComponent, dialogConfig);
+  }
+
+
 }
