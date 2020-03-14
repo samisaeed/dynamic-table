@@ -11,6 +11,7 @@ import {ViewComponentComponent} from "./view-component/view-component.component"
 export class AppComponent implements OnInit, AfterViewInit {
 
   @ViewChild(DynamicTableComponent, {static: true}) paginator: DynamicTableComponent;
+  @ViewChild(DynamicTableComponent, {static: true}) sort: DynamicTableComponent;
 
   public rows = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -36,6 +37,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.paginator.pagination.subscribe(res => {
       // console.log('parent pagination value ngAfterViewInit', res);
+    });
+    this.sort.sorting.subscribe(response => {
+      // console.log('parent sorting value ngAfterViewInit', response);
     });
   }
 

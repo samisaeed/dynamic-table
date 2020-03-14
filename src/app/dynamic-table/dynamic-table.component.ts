@@ -17,6 +17,7 @@ export class DynamicTableComponent implements OnInit , AfterViewInit {
   @Output() editData = new EventEmitter();
   @Output() viewDetails = new EventEmitter();
   pagination = new BehaviorSubject(null);
+  sorting = new BehaviorSubject(null);
 
   public columns;
 
@@ -44,6 +45,9 @@ export class DynamicTableComponent implements OnInit , AfterViewInit {
    if (this.serverPagination === true) {
      this.paginator.page.subscribe(res => {
        this.pagination.next(res);
+     });
+     this.sort.sortChange.subscribe(response => {
+       this.sorting.next(response);
      });
    }
   }
