@@ -1,7 +1,7 @@
-import {AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DynamicTableComponent} from './dynamic-table/dynamic-table.component';
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {ViewComponentComponent} from "./view-component/view-component.component";
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {ViewComponentComponent} from './view-component/view-component.component';
 
 @Component({
   selector: 'app-root',
@@ -54,7 +54,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   viewDetails(event): void {
-    // const icon = 'delete';
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '800px';
     dialogConfig.data = event;
